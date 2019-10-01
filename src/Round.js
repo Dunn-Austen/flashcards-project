@@ -1,7 +1,7 @@
-class Card {
+class Round {
   constructor() {
 
   }
 }
 
-module.exports = Card;
+module.exports = Round;
