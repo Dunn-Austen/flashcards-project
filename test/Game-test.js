@@ -5,7 +5,7 @@ const Game = require('../src/Game');
 
 describe('Game', function() {
 
-  it('should be a function', function() {
+  it.skip('should be a function', function() {
     const game = new Game();
     expect(Game).to.be.a('function');
   });
