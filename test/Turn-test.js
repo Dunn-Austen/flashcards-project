@@ -43,51 +43,28 @@ describe('Turn', function() {
     expect(turn.returnCard()).to.equal(card);
   });
 
-  it('should have a default correctGuess value of undefined', function() {
-    const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    const turn = new Turn('pug', card);
-    expect(turn.correctGuess).to.equal(undefined);
-  });
-
   it('should evaluate false if the guess is not correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('pug', card);
-
-    turn.evaluateGuess();
-
-    expect(turn.correctGuess).to.equal(false);
+    expect(turn.evaluateGuess()).to.equal(false);
   });
 
   it('should evaluate true if the guess is correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('object', card);
-
-    turn.evaluateGuess();
-
-    expect(turn.correctGuess).to.equal(true);
+    expect(turn.evaluateGuess()).to.equal(true);
   });
 
   it('should return \'correct!\' if the guess is correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('object', card);
-
-    turn.evaluateGuess();
-
-    expect(turn.correctGuess).to.equal(true);
     expect(turn.giveFeedback()).to.equal('correct!');
   });
 
   it('should return \'incorrect!\' if the guess is incorrect', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('pug', card);
-
-    turn.evaluateGuess();
-
-    expect(turn.correctGuess).to.equal(false);
     expect(turn.giveFeedback()).to.equal('incorrect!');
-    // The way things are now, I have evalGuess and giveFeedback methods intertwined.
-    // Would it be better to write more segregated code, for example, to test the outcome
-    // of evalGuess with givefeedback rather than testing basically the same thing?
   });
 
 });
