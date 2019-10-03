@@ -26,7 +26,6 @@ class Game {
     this.deck = deck;
     const round = new Round(this.deck);
     this.round = round
-    console.log(round.deck[0])
   }
 
   printMessage(deck, round) {

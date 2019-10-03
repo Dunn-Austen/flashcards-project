@@ -23,10 +23,10 @@ class Turn {
   }
 
   giveFeedback() {
-    if (this.guess === this.card.correctAnswer) {
+    if (this.guess === this.card.correctAnswer && this.correctGuess === true) {
       return 'correct!'
 
-    } else if (this.guess !== this.card.correctAnswer) {
+    } else if (this.guess !== this.card.correctAnswer && this.correctGuess === false) {
       return 'incorrect!'
     }
     // Alternative, perhaps cleaner code

@@ -43,6 +43,12 @@ describe('Turn', function() {
     expect(turn.returnCard()).to.equal(card);
   });
 
+  it('should have a default correctGuess value of undefined', function() {
+    const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const turn = new Turn('pug', card);
+    expect(turn.correctGuess).to.equal(undefined);
+  });
+
   it('should be false if the guess is not correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('pug', card);
