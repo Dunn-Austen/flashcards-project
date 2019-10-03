@@ -92,7 +92,7 @@ describe('Round', function() {
     expect(round.turn).to.be.an.instanceof(Turn);
   });
 
-  it('should advance forward one card and update the current card', function() {
+  it('should advance forward one card each turn', function() {
     const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
@@ -124,19 +124,10 @@ describe('Round', function() {
     round.takeTurn('sea otter');
 
     expect(round.turn.correctGuess).to.equal(true);
-  });
 
-  it('should store the ids of incorrect guesses', function() {
-    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
-    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
-    const deck = new Deck([card1, card2, card3]);
-    const round = new Round(deck);
-
-    round.takeTurn('pug');
+    round.takeTurn('lorem ipsum');
 
     expect(round.turn.correctGuess).to.equal(false);
-    expect(round.incorrectGuesses).to.deep.equal([1]);
   });
 
   it('should give guess feedback if correct or incorrect', function() {
@@ -150,6 +141,55 @@ describe('Round', function() {
 
     expect(round.turn.correctGuess).to.equal(false);
     expect(round.incorrectGuesses).to.deep.equal([1]);
+  });
+
+  it('should track the ids of all guesses', function() {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+
+    round.takeTurn('pug');
+    round.takeTurn('large pug');
+
+    expect(round.totalGuesses).to.deep.equal([1, 14]);
+  });
+
+  it('should store the ids of incorrect guesses', function() {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+
+    round.takeTurn('pug');
+
+    expect(round.turn.correctGuess).to.equal(false);
+    expect(round.incorrectGuesses).to.deep.equal([1]);
+
+    round.takeTurn('pug');
+
+    expect(round.turn.correctGuess).to.equal(false);
+    expect(round.incorrectGuesses).to.deep.equal([1, 14]);
+  });
+
+  it('should store the ids of correct guesses', function() {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+
+    round.takeTurn('sea otter');
+
+    expect(round.turn.correctGuess).to.equal(true);
+    expect(round.correctGuesses).to.deep.equal([1]);
+
+    round.takeTurn('gallbladder');
+
+    expect(round.turn.correctGuess).to.equal(true);
+    expect(round.correctGuesses).to.deep.equal([1, 14]);
   });
 
   it('should calculate the percentage of correct guesses', function() {

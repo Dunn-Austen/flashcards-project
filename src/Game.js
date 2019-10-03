@@ -13,6 +13,15 @@ class Game {
     this.round;
   }
 
+  printMessage(deck, round) {
+    console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
+-----------------------------------------------------------------------`)
+  }
+
+  printQuestion(round) {
+    util.main(round);
+  }
+
   start() {
     const cardsFromData = [];
     this.currentRound++;
@@ -25,17 +34,42 @@ class Game {
     const deck = new Deck(cardsFromData);
     this.deck = deck;
     const round = new Round(this.deck);
-    this.round = round
-  }
-
-  printMessage(deck, round) {
-    console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
------------------------------------------------------------------------`)
-  }
-
-  printQuestion(round) {
-    util.main(round);
+    this.round = round;
+    this.printMessage(this.deck, this.round);
+    this.printQuestion(this.round);
+    this.round.endRound()
   }
 }
+
+// class Game {
+//   constructor() {
+//     this.currentRound = 0;
+//   }
+//
+//   printMessage(deck, round) {
+//     console.log(`Welcome to FlashCards! You are playing with ${deck.countCards()} cards.
+// -----------------------------------------------------------------------`)
+//   }
+//
+//   printQuestion(round) {
+//     util.main(round);
+//   }
+//
+//   start() {
+//     const cardsFromData = [];
+//     this.currentRound++;
+//
+//     prototypeQuestions.forEach(function(theCard) {
+//       const card = new Card(theCard.id, theCard.question, theCard.answers, theCard.correctAnswer);
+//       cardsFromData.push(card)
+//     });
+//
+//     const deck = new Deck(cardsFromData);
+//     const round = new Round(deck);
+//     this.printMessage(deck, round);
+//     this.printQuestion(round);
+//     round.endRound()
+//   }
+// }
 
 module.exports = Game;

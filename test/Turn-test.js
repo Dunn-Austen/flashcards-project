@@ -49,7 +49,7 @@ describe('Turn', function() {
     expect(turn.correctGuess).to.equal(undefined);
   });
 
-  it('should be false if the guess is not correct', function() {
+  it('should evaluate false if the guess is not correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('pug', card);
 
@@ -58,7 +58,7 @@ describe('Turn', function() {
     expect(turn.correctGuess).to.equal(false);
   });
 
-  it('should be true if the guess is correct', function() {
+  it('should evaluate true if the guess is correct', function() {
     const card = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     const turn = new Turn('object', card);
 
@@ -85,6 +85,9 @@ describe('Turn', function() {
 
     expect(turn.correctGuess).to.equal(false);
     expect(turn.giveFeedback()).to.equal('incorrect!');
+    // The way things are now, I have evalGuess and giveFeedback methods intertwined.
+    // Would it be better to write more segregated code, for example, to test the outcome
+    // of evalGuess with givefeedback rather than testing basically the same thing?
   });
 
 });

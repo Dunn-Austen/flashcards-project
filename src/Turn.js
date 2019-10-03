@@ -16,19 +16,50 @@ class Turn {
   evaluateGuess() {
     if (this.guess === this.card.correctAnswer) {
       this.correctGuess = true;
+      return this.correctGuess;
 
     } else if (this.guess !== this.card.correctAnswer) {
       this.correctGuess = false;
+      return this.correctGuess;
     }
   }
 
   giveFeedback() {
-    if (this.guess === this.card.correctAnswer && this.correctGuess === true) {
+    if (this.correctGuess === true) {
       return 'correct!'
-
-    } else if (this.guess !== this.card.correctAnswer && this.correctGuess === false) {
+    } else {
       return 'incorrect!'
     }
+
+
+
+
+
+
+  // Attempt Two
+  // evaluateGuess() {
+  //   if (this.guess === this.card.correctAnswer) {
+  //     this.correctGuess = true;
+  //
+  //   } else if (this.guess !== this.card.correctAnswer) {
+  //     this.correctGuess = false;
+  //   }
+  // }
+  //
+  // giveFeedback() {
+  //   if (this.correctGuess === true) {
+  //     return 'correct!'
+  //   } else {
+  //     return 'incorrect!'
+  //   }
+
+    // Attempt One
+    // if (this.guess === this.card.correctAnswer && this.correctGuess === true) {
+    //   return 'correct!'
+    //
+    // } else if (this.guess !== this.card.correctAnswer && this.correctGuess === false) {
+    //   return 'incorrect!'
+    // }
     // Alternative, perhaps cleaner code
     // if (this.evaluateGuess()) {return correct!}
   }

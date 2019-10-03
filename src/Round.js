@@ -32,11 +32,11 @@ class Round {
       } else if (this.turn.correctGuess === true) {
         this.correctGuesses.push(this.deck[this.turnsCount].cardId);
         }
-    this.turn.giveFeedback();
     this.turnsCount++;
   }
 
   calculatePercentCorrect() {
+    // Consider removing the interpolated percentage symbol per the spec (returns just 50)
     this.percentCorrect = `${((this.correctGuesses.length / this.totalGuesses.length) * 100)}%`;
     return this.percentCorrect
   }
