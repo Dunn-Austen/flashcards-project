@@ -123,11 +123,11 @@ describe('Round', function() {
 
     round.takeTurn('sea otter');
 
-    expect(round.turn.correctGuess).to.equal(true);
+    expect(round.turn.evaluateGuess()).to.equal(true);
 
     round.takeTurn('lorem ipsum');
 
-    expect(round.turn.correctGuess).to.equal(false);
+    expect(round.turn.evaluateGuess()).to.equal(false);
   });
 
   it('should give guess feedback if correct or incorrect', function() {
@@ -139,7 +139,7 @@ describe('Round', function() {
 
     round.takeTurn('pug');
 
-    expect(round.turn.correctGuess).to.equal(false);
+    expect(round.turn.giveFeedback()).to.equal('incorrect!');
     expect(round.incorrectGuesses).to.deep.equal([1]);
   });
 
@@ -165,12 +165,10 @@ describe('Round', function() {
 
     round.takeTurn('pug');
 
-    expect(round.turn.correctGuess).to.equal(false);
     expect(round.incorrectGuesses).to.deep.equal([1]);
 
     round.takeTurn('pug');
 
-    expect(round.turn.correctGuess).to.equal(false);
     expect(round.incorrectGuesses).to.deep.equal([1, 14]);
   });
 
@@ -183,12 +181,10 @@ describe('Round', function() {
 
     round.takeTurn('sea otter');
 
-    expect(round.turn.correctGuess).to.equal(true);
     expect(round.correctGuesses).to.deep.equal([1]);
 
     round.takeTurn('gallbladder');
 
-    expect(round.turn.correctGuess).to.equal(true);
     expect(round.correctGuesses).to.deep.equal([1, 14]);
   });
 
@@ -202,7 +198,7 @@ describe('Round', function() {
     round.takeTurn('pug');
     round.takeTurn('gallbladder');
 
-    expect(round.calculatePercentCorrect()).to.equal('50%');
+    expect(round.calculatePercentCorrect()).to.equal(50);
   });
 
   it('should calculate the percentage of correct guesses', function() {
