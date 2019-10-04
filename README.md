@@ -4,7 +4,7 @@ Step right up! Flashcards will test your knowledge of javascript array prototype
 
 ---
 ## Flashcards in Action!
-2019-10-03 23.06.14.gif
+![Flashcards in action](readme.gif)
 
 
 ---
